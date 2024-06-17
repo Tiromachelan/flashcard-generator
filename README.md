@@ -8,3 +8,6 @@ Python 3 and the following pip packages:
 - python-dotenv
 
 You will also need to create an OpenAI API key and `.env` file in the root directory of the project.  Paste the key in the `.env` file, in the format `OPENAI_API_KEY=<your api key here>`
+
+## Usage:
+Paste your text into `user_input.txt` and run `main.py`
