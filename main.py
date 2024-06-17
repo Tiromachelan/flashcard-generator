@@ -1,3 +1,5 @@
+# Produces produces flashcards in the form of Question: Answer:
+
 import os
 from openai import OpenAI
 from dotenv import load_dotenv
@@ -6,13 +8,16 @@ load_dotenv()
 
 client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
 
+with open("user_input.txt", "r", encoding="utf-8", errors="ignore") as file:
+    user_input = file.read()
+
+
 completion = client.chat.completions.create(
     model="gpt-3.5-turbo",
     messages=[
-        #{"role": "system", "content": "You are a flashcard generator that takes text input and produces flashcards based on that in the form of Question: Answer:"}
-        {"role": "system", "content": "You are a poetic assistant, skilled in explaining complex programming concepts with creative flair."},
-        {"role": "user", "content": "Compose a poem that explains the concept of recursion in programming."}
+        {"role": "system", "content": "You are a flashcard generator that takes text input and produces several concise flashcards based on the text in the form of Question: Answer:"},
+        {"role": "user", "content": user_input}
     ]
 )
 
-print(completion.choices[0].message)
+print(completion.choices[0].message.content)
