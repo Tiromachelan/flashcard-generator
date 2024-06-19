@@ -6,8 +6,18 @@ Automatically generate flashcards from text using the OpenAI API
 Python 3 and the following pip packages:
 - openai
 - python-dotenv
+- PyQt6
 
-You will also need to create an OpenAI API key and `.env` file in the root directory of the project.  Paste the key in the `.env` file, in the format `OPENAI_API_KEY=<your api key here>`
+
+## Installation:
+### Windows:
+Run `.\install.bat`
+
+### Unix:
+Run `chmod +x install.sh`, and then `./install.sh`
+
+You will also need to create an OpenAI API key and paste it in the `.env` file, which is created by the install scripts.
+
 
 ## Usage:
 Paste your text into `user_input.txt` and run `main.py`
