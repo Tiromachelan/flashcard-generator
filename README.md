@@ -1,5 +1,5 @@
 # flashcard-generator
-Automatically generate flashcards from text using the OpenAI API
+Automatically generate flashcards from text using the OpenAI API.  The goal is eventually to produce an Anki deck; as of now, only terminal output is supported.
 
 
 ## Dependencies:
