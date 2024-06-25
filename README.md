@@ -1,5 +1,5 @@
 # flashcard-generator
-Automatically generate flashcards from text using the OpenAI API.  The goal is eventually to produce an Anki deck; as of now, only terminal output is supported.
+Automatically generate flashcards from text using the OpenAI API.  The goal is eventually to produce an Anki deck; as of now, only terminal output is supported.  Be aware that AI sometimes makes mistakes.
 
 
 ## Dependencies:
@@ -7,6 +7,7 @@ Python 3 and the following pip packages:
 - openai
 - python-dotenv
 - PyQt6
+- pypdf
 
 
 ## Installation:
@@ -22,4 +23,4 @@ You will need to create an OpenAI API key and paste it in the `.env` file, which
 
 
 ## Usage:
-Paste your text into `user_input.txt` and run `main.py`
+Run `python main.py <name of file here>`.  Currently supported filetypes are `.txt` and `.pdf`.  Make sure that they are with the OpenAI API's context length, since automatic checking is not yet supported.  As of now, PDF support does not work very well, especially if the PDF is more than 1 page.
