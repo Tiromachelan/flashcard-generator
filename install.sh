@@ -7,3 +7,4 @@ echo "OPENAI_API_KEY=" > .env
 pip install openai
 pip install python-dotenv
 pip install PyQt6
+pip install pypdf

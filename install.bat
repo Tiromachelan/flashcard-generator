@@ -7,3 +7,4 @@ REM Install the required pip packages
 pip install openai
 pip install python-dotenv
 pip install PyQt6
+pip install pypdf
