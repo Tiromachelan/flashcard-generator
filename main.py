@@ -1,27 +1,40 @@
-# Produces produces flashcards in the form of Question: Answer:
-
+from pypdf import PdfReader
+import mimetypes
+import logging
 import os
-import json
-from openai import OpenAI
-from dotenv import load_dotenv
+import sys
 
-load_dotenv()
-
-client = OpenAI(api_key=os.environ.get("OPENAI_API_KEY"))
-
-with open("user_input.txt", "r", encoding="utf-8", errors="ignore") as file:
-    user_input = file.read()
-
-with open("config.json", "r") as config:
-    data = json.load(config)
+import generate
 
 
-completion = client.chat.completions.create(
-    model="gpt-3.5-turbo",
-    messages=[
-        {"role": "system", "content": f'{"You are a flashcard generator that takes text input and produces"}{data["number_of_cards"]}{"concise flashcards based on the text in the form of Question: Answer:"}'},
-        {"role": "user", "content": user_input}
-    ]
-)
+if len(sys.argv) > 1:
+    input_file = sys.argv[1]
+    if os.path.isfile(input_file):
+        filetype, _ = mimetypes.guess_type(input_file)
+        #print(filetype)
 
-print(completion.choices[0].message.content)
+        # Clear the file
+        with open("user_input.txt", "w"):
+            pass
+
+        # .txt
+        if filetype == "text/plain":
+            generate.generate_text(input_file)
+            #pass
+            
+        # .pdf
+        elif filetype == "application/pdf":
+            logging.getLogger("pypdf").setLevel(logging.ERROR)
+            reader = PdfReader(input_file, strict=False)
+            #num_pages = len(reader.pages)
+            text_string = ""
+            with open("user_input.txt", "a", encoding="utf-8") as file:
+                for page in reader.pages:
+                    print(page.extract_text().strip(" "), file=file)
+                    #text_string += page.extract_text()
+            generate.generate_text(input_file)
+            #print(text_string)
+    else:
+        print("Error: not a file")
+else:
+    print("Error: please provide a file")
