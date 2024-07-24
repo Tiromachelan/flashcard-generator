@@ -32,7 +32,8 @@ if len(sys.argv) > 1:
                 for page in reader.pages:
                     print(page.extract_text().strip(" "), file=file)
                     #text_string += page.extract_text()
-            generate.generate_text(input_file)
+            #generate.generate_text(input_file)
+            generate.generate_text("user_input.txt")
             #print(text_string)
     else:
         print("Error: not a file")
